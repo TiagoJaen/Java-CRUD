@@ -5,8 +5,6 @@ import Excepciones.DireccionInexistenteException;
 import Excepciones.InputVacioException;
 import Interfaces.VerificarAlumno;
 import Interfaces.VerificarDireccion;
-import Modelo.Direccion;
-import Modelo.MySQLConexion;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,13 +15,13 @@ public class DireccionDAO implements VerificarAlumno, VerificarDireccion {
 
     //CONSTRUCTOR
     public DireccionDAO(){
-        conn = MySQLConexion.getInstancia().getConnection();
+        conn = SQLiteConexion.getConnection();
         crearTablaSiNoExiste();
     }
 
     //METODOS
     private void crearTablaSiNoExiste() {
-        String sql = "CREATE TABLE IF NOT EXISTS direcciones (id INTEGER PRIMARY KEY AUTO_INCREMENT," +
+        String sql = "CREATE TABLE IF NOT EXISTS direcciones (id INTEGER PRIMARY KEY AUTOINCREMENT," +
                      "calle TEXT NOT NULL, " +
                      "altura INTEGER NOT NULL, " +
                      "alumno_id INTEGER NOT NULL, " +

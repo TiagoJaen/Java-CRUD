@@ -4,6 +4,7 @@ import Controlador.AlumnoController;
 import Controlador.DireccionController;
 import Modelo.Alumno;
 import Modelo.Direccion;
+import Modelo.SQLiteConexion;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -41,15 +42,42 @@ public class Menu {
                 scanner.nextLine(); // limpia el buffer
 
                 switch (opcion) {
-                    case 1 -> agregarAlumno();
-                    case 2 -> agregarDireccion();
-                    case 3 -> listarAlumnos();
-                    case 4 -> listarDirecciones();
-                    case 5 -> actualizarEdadAlumno();
-                    case 6 -> eliminarAlumno();
-                    case 7 -> eliminarDireccion();
-                    case 0 -> System.out.println("¡Chau!");
-                    default -> System.out.println("Opción inválida");
+                    case 1:
+                        agregarAlumno();
+                        break;
+
+                    case 2:
+                        agregarDireccion();
+                        break;
+
+                    case 3:
+                        listarAlumnos();
+                        break;
+
+                    case 4:
+                        listarDirecciones();
+                        break;
+
+                    case 5:
+                        actualizarEdadAlumno();
+                        break;
+
+                    case 6:
+                        eliminarAlumno();
+                        break;
+
+                    case 7:
+                        eliminarDireccion();
+                        break;
+
+                    case 0:
+                        System.out.println("¡Chau!");
+                        SQLiteConexion.cerrarConexion();
+                        break;
+
+                    default:
+                        System.out.println("Opción inválida");
+                        break;
                 }
             }catch (InputMismatchException e){
                 System.out.println("Has ingresado un tipo de dato incorrecto :(");

@@ -2,24 +2,22 @@ package Modelo;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 
 import Excepciones.AlumnoInexistenteException;
 import Excepciones.InputVacioException;
 import Interfaces.VerificarAlumno;
-import Modelo.Alumno;
 
 public class AlumnoDAO implements VerificarAlumno {
     private Connection conn;
 
     public AlumnoDAO() {
-        conn = MySQLConexion.getInstancia().getConnection();
+        conn = SQLiteConexion.getConnection();
         crearTablaSiNoExiste();
     }
 
     private void crearTablaSiNoExiste() {
-        String sql = "CREATE TABLE IF NOT EXISTS alumnos (id INTEGER PRIMARY KEY AUTO_INCREMENT, nombre TEXT NOT NULL, apellido TEXT NOT NULL, edad INTEGER NOT NULL, email TEXT UNIQUE NOT NULL)";
+        String sql = "CREATE TABLE IF NOT EXISTS alumnos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT NOT NULL, apellido TEXT NOT NULL, edad INTEGER NOT NULL, email TEXT UNIQUE NOT NULL)";
         try (Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
